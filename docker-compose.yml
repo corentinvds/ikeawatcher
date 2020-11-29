@@ -1,0 +1,19 @@
+version: "3"
+
+networks:
+    ikea_watcher_net:
+        driver: bridge
+
+services:
+  ikea_watcher:
+      restart: on-failure
+      networks:
+          - ikea_watcher_net
+      build: .
+      container_name: ikea_watcher
+      environment:
+        TO_EMAIL: ${TO_EMAIL}
+        WAIT_DURATION: ${WAIT_DURATION}
+        FROM_EMAIL: ${FROM_EMAIL}
+        SMTP_PASSWORD: ${SMTP_PASSWORD}
+      command: ${ARGS}
